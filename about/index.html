@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 - Ming的个人网页</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- 导航菜单 -->
+    <header>
+        <nav>
+            <a href="/" class="logo">Ming</a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/">首页</a></li>
+                <li><a href="/about/index.html" class="active">关于</a></li>
+                <li><a href="/blog/index.html">博客</a></li>
+                <li><a href="/friends/index.html">朋友</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <section class="about-content">
+            <h2>关于我</h2>
+            <p>
+                你好！我是Ming，一位充满热情的Web开发者和设计师。我喜欢探索新技术，创建令人惊叹的用户体验。
+            </p>
+            <p>
+                我的编程之旅始于几年前，从最简单的HTML开始，现在已经掌握了现代Web开发的各种技术栈。我相信持续学习和不断进步是成功的关键。
+            </p>
+            <p>
+                在这个个人网站上，我分享我的想法、经验和项目。如果你对我的工作感兴趣或有任何合作机会，欢迎与我联系。
+            </p>
+
+            <div class="skills">
+                <h3 style="color: #2563eb; margin-bottom: 1rem;">我的技能</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag">HTML5</div>
+                    <div class="skill-tag">CSS3</div>
+                    <div class="skill-tag">JavaScript</div>
+                    <div class="skill-tag">React</div>
+                    <div class="skill-tag">Vue.js</div>
+                    <div class="skill-tag">Node.js</div>
+                    <div class="skill-tag">Git</div>
+                    <div class="skill-tag">UI/UX设计</div>
+                    <div class="skill-tag">响应式设计</div>
+                    <div class="skill-tag">Web性能优化</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background-color: #f0f9ff; border-radius: 8px; border-left: 4px solid #2563eb;">
+                <h3 style="color: #2563eb; margin-bottom: 0.5rem;">联系我</h3>
+                <p style="color: #666; margin-bottom: 0.5rem;">📧 邮箱: your_email@example.com</p>
+                <p style="color: #666; margin-bottom: 0.5rem;">💼 LinkedIn: <a href="#" style="color: #2563eb; text-decoration: none;">your_profile</a></p>
+                <p style="color: #666;">🐙 GitHub: <a href="#" style="color: #2563eb; text-decoration: none;">your_github</a></p>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2026 Ming's Personal Website. All rights reserved.</p>
+        <p>使用 HTML5 和 CSS3 制作 | 托管在 GitHub Pages</p>
+    </footer>
+
+    <script>
+        // 导航菜单切换
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 链接点击时关闭菜单
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

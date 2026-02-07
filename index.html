@@ -1,1 +1,120 @@
-<h1>猥琐傻逼</h1>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ming - 个人网页</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- 导航菜单 -->
+    <header>
+        <nav>
+            <a href="/" class="logo">Ming</a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/" class="active">首页</a></li>
+                <li><a href="/about/index.html">关于</a></li>
+                <li><a href="/blog/index.html">博客</a></li>
+                <li><a href="/friends/index.html">朋友</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <!-- 英雄部分 -->
+        <section class="hero">
+            <h1>欢迎来到我的网页</h1>
+            <p>一个充满热情和创意的开发者</p>
+        </section>
+
+        <!-- 爱好部分 -->
+        <section class="hobbies">
+            <h2>我的爱好</h2>
+            <div class="hobby-grid">
+                <div class="hobby-card">
+                    <h3>🎨 设计</h3>
+                    <p>喜欢探索UI/UX设计，创建美观实用的用户界面</p>
+                </div>
+                <div class="hobby-card">
+                    <h3>💻 编程</h3>
+                    <p>热爱前端和全栈开发，不断学习新技术</p>
+                </div>
+                <div class="hobby-card">
+                    <h3>📚 阅读</h3>
+                    <p>通过阅读书籍和文章来拓展知识面</p>
+                </div>
+                <div class="hobby-card">
+                    <h3>🎮 游戏</h3>
+                    <p>在游戏中放松，同时学习游戏设计思想</p>
+                </div>
+                <div class="hobby-card">
+                    <h3>🎵 音乐</h3>
+                    <p>享受各种音乐类型，有时尝试制作音乐</p>
+                </div>
+                <div class="hobby-card">
+                    <h3>🏃 运动</h3>
+                    <p>定期锻炼和户外活动来保持健康</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 快速链接 -->
+        <section style="text-align: center; margin: 3rem 0; padding: 2rem; background: white; border-radius: 8px;">
+            <h2 style="color: #2563eb; margin-bottom: 1rem;">快速导航</h2>
+            <p style="margin-bottom: 1rem; color: #666;">浏览我的博客、了解更多关于我，或者看看我的朋友们</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="/blog/index.html" style="display: inline-block; background-color: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; transition: background-color 0.3s;">📝 阅读博客</a>
+                <a href="/about/index.html" style="display: inline-block; background-color: #64748b; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; transition: background-color 0.3s;">👤 关于我</a>
+                <a href="/friends/index.html" style="display: inline-block; background-color: #8b5cf6; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; transition: background-color 0.3s;">👥 我的朋友</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2026 Ming's Personal Website. All rights reserved.</p>
+        <p>使用 HTML5 和 CSS3 制作 | 托管在 GitHub Pages</p>
+    </footer>
+
+    <script>
+        // 导航菜单切换
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 链接点击时关闭菜单
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 设置活跃链接
+        window.addEventListener('load', () => {
+            const currentLocation = location.pathname;
+            links.forEach(link => {
+                let href = link.getAttribute('href');
+                if (currentLocation === '/' || currentLocation === '/index.html') {
+                    if (href === '/' || href === '/index.html') {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                } else {
+                    if (currentLocation.includes(href) && href !== '/') {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
