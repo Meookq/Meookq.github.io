@@ -1,44 +1,43 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - 页面未找到</title>
+    <title>404 - Page Not Found</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <!-- 导航菜单 -->
+    <!-- Navigation Menu -->
     <header>
         <nav>
             <a href="/" class="logo">Ming</a>
             <button class="menu-toggle" id="menuToggle">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="/">首页</a></li>
-                <li><a href="/about/index.html">关于</a></li>
-                <li><a href="/blog/index.html">博客</a></li>
-                <li><a href="/friends/index.html">朋友</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/index.html">About</a></li>
+                <li><a href="/blog/index.html">Blog</a></li>
+                <li><a href="/friends/index.html">Friends</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- 主要内容 -->
+    <!-- Main Content -->
     <div class="container">
         <section style="text-align: center; padding: 4rem 2rem;">
             <h1 style="font-size: 4rem; color: #e0e7ff; margin-bottom: 1rem;">404</h1>
-            <h2 style="color: #666; margin-bottom: 1rem;">哎呀，页面未找到！</h2>
-            <p style="color: #999; margin-bottom: 2rem; font-size: 1.1rem;">很遗憾，你访问的页面不存在。请检查URL或返回首页。</p>
-            <a href="/" style="display: inline-block; background-color: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; transition: background-color 0.3s;">🏠 返回首页</a>
+            <h2 style="color: #666; margin-bottom: 1rem;">Oops, Page Not Found!</h2>
+            <p style="color: #999; margin-bottom: 2rem; font-size: 1.1rem;">Sorry, the page you're looking for doesn't exist. Please check the URL or return to the home page.</p>
+            <a href="/" style="display: inline-block; background-color: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; transition: background-color 0.3s;">🏠 Back to Home</a>
         </section>
     </div>
 
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Ming's Personal Website. All rights reserved.</p>
-        <p>使用 HTML5 和 CSS3 制作 | 托管在 GitHub Pages</p>
+        <p>Built with HTML5 and CSS3 | Hosted on GitHub Pages</p>
     </footer>
 
     <script>
-        // 导航菜单切换
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -46,7 +45,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // 链接点击时关闭菜单
         const links = navLinks.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', () => {

@@ -1,78 +1,44 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>博客 - Ming的个人网页</title>
+    <title>Blog - Ming's Personal Website</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <!-- 导航菜单 -->
+    <!-- Navigation Menu -->
     <header>
         <nav>
             <a href="/" class="logo">Ming</a>
             <button class="menu-toggle" id="menuToggle">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="/">首页</a></li>
-                <li><a href="/about/index.html">关于</a></li>
-                <li><a href="/blog/index.html" class="active">博客</a></li>
-                <li><a href="/friends/index.html">朋友</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/index.html">About</a></li>
+                <li><a href="/blog/index.html" class="active">Blog</a></li>
+                <li><a href="/friends/index.html">Friends</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- 主要内容 -->
+    <!-- Main Content -->
     <div class="container">
         <section class="blog-section">
-            <h2 class="section-title">我的博客</h2>
-            <div class="blog-list">
-                <article class="blog-item">
-                    <h3>如何开始学习前端开发</h3>
-                    <div class="blog-date">2026年2月5日</div>
-                    <p class="blog-description">分享我的前端学习经验，包括HTML、CSS、JavaScript的基础知识，以及如何找到适合自己的学习资源和方法。</p>
-                </article>
-
-                <article class="blog-item">
-                    <h3>响应式设计最佳实践</h3>
-                    <div class="blog-date">2026年2月2日</div>
-                    <p class="blog-description">讨论如何创建适应不同屏幕尺寸的网页设计，以及Mobile-First方法的重要性。</p>
-                </article>
-
-                <article class="blog-item">
-                    <h3>JavaScript异步编程指南</h3>
-                    <div class="blog-date">2026年1月28日</div>
-                    <p class="blog-description">深入了解回调函数、Promise和async/await，以及如何处理异步操作中的错误。</p>
-                </article>
-
-                <article class="blog-item">
-                    <h3>CSS Grid 布局完全指南</h3>
-                    <div class="blog-date">2026年1月20日</div>
-                    <p class="blog-description">探索CSS Grid的强大功能，学习如何使用它创建复杂的响应式布局。</p>
-                </article>
-
-                <article class="blog-item">
-                    <h3>Web性能优化技巧</h3>
-                    <div class="blog-date">2026年1月15日</div>
-                    <p class="blog-description">分享提高网站性能的方法，包括图片优化、代码分割、缓存策略等。</p>
-                </article>
-
-                <article class="blog-item">
-                    <h3>我的2025年技术总结</h3>
-                    <div class="blog-date">2026年1月1日</div>
-                    <p class="blog-description">回顾过去一年学到的技术知识，分享遇到的挑战和解决方案。</p>
-                </article>
+            <h2 class="section-title">My Blog</h2>
+            <div style="text-align: center; padding: 3rem 0;">
+                <p style="color: #666; font-size: 1.1rem; margin-bottom: 1rem;">No posts yet. Check back soon!</p>
+                <p style="color: #999;">Coming soon...</p>
             </div>
         </section>
     </div>
 
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Ming's Personal Website. All rights reserved.</p>
-        <p>使用 HTML5 和 CSS3 制作 | 托管在 GitHub Pages</p>
+        <p>Built with HTML5 and CSS3 | Hosted on GitHub Pages</p>
     </footer>
 
     <script>
-        // 导航菜单切换
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -80,7 +46,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // 链接点击时关闭菜单
         const links = navLinks.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', () => {
