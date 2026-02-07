@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sample Post 1 - Ming's Blog</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/" class="logo">Ming</a>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/index.html">About</a></li>
+        <li><a href="/blog/index.html" class="active">Blog</a></li>
+        <li><a href="/friends/index.html">Friends</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <article class="blog-item">
+      <h1>Sample Post 1</h1>
+      <p class="blog-date">2026-02-07</p>
+      <p class="blog-description">This is a short placeholder for Sample Post 1. Replace this with your content.</p>
+      <p></p>
+    </article>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Ming's Personal Website.</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle && menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+    navLinks && navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('active')));
+  </script>
+</body>
+</html>
