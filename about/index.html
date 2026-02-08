@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Ming's Personal Website</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <!-- Navigation Menu -->
     <header>
         <nav>
-            <a href="/" class="logo">Ming</a>
+            <a href="../index.html" class="logo">Ming</a>
             <button class="menu-toggle" id="menuToggle">☰</button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="/">Home</a></li>
-                <li><a href="/about/index.html" class="active">About</a></li>
-                <li><a href="/blog/index.html">Blog</a></li>
-                <li><a href="/friends/index.html">Friends</a></li>
+                <li><a href="index.html" class="active">About</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="../friends/index.html">Friends</a></li>
             </ul>
         </nav>
     </header>
@@ -34,6 +34,37 @@
             <p>
                 On this personal website, I share my thoughts, experiences, and projects. If you're interested in my work or have any collaboration opportunities, feel free to reach out to me.
             </p>
+
+            <!-- 爱好（从首页迁移） -->
+            <section class="hobbies">
+                <h2>HOBBIES</h2>
+                <div class="hobby-grid">
+                    <div class="hobby-card">
+                        <h3>🎨 Arts</h3>
+                        <p>I like abstract art and drawing.</p>
+                    </div>
+                    <div class="hobby-card">
+                        <h3>💻 coding</h3>
+                        <p>I enjoy coding and building web applications using modern technologies.</p>
+                    </div>
+                    <div class="hobby-card">
+                        <h3>📚 Reading</h3>
+                        <p>I enjoy reading books and articles to expand my knowledge and stay curious.</p>
+                    </div>
+                    <div class="hobby-card" style="background-color: #16f806;">
+                        <h3>🎮 Gaming</h3>
+                        <p>I enjoy playing various games, especially Minecraft</p>
+                    </div>
+                    <div class="hobby-card">
+                        <h3>🎵 Music</h3>
+                        <p>I love extreme metal and electronic music, I play guitar and piano.</p>
+                    </div>
+                    <div class="hobby-card" style="background-color: #ff9b9b;">
+                        <h3>🌸 Hanakumo_Rin</h3>
+                        <p>I love 🌸Hanakumo_Rin🌸</p>
+                    </div>
+                </div>
+            </section>
 
             <div class="skills">
                 <h3 style="color: #2563eb; margin-bottom: 1rem;">My Skills</h3>
@@ -59,6 +90,30 @@
             </div>
         </section>
     </div>
+    <!-- BEGIN COMMENTS MODULE: copy this entire block to add comments -->
+    <section class="comments">
+        <h2 style="color: #2563eb; margin-bottom: 1rem; text-align: center;">Comments</h2>
+        <div id="cusdis_thread"
+             data-host="https://cusdis.com"
+             data-app-id="b8b9f88c-9eaa-483a-8126-9eaa02574b34"
+             data-page-id="{{ PAGE_ID }}"
+             data-page-url="{{ PAGE_URL }}"
+             data-page-title="{{ PAGE_TITLE }}"
+        ></div>
+        <script>
+            (function(){
+                var t = document.getElementById('cusdis_thread'); if(!t) return;
+                try {
+                    var pid = location.pathname || 'about';
+                    t.setAttribute('data-page-id', pid);
+                    t.setAttribute('data-page-url', location.href);
+                    t.setAttribute('data-page-title', document.title || 'About');
+                } catch(e){}
+            })();
+        </script>
+        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+    </section>
+    <!-- END COMMENTS MODULE -->
 
     <!-- Footer -->
     <footer>

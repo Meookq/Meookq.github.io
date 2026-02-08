@@ -74,21 +74,41 @@ nav {
 /* 主页 */
 .hero {
     text-align: center;
-    padding: 4rem 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     color: white;
-    border-radius: 10px;
+    border-radius: 15px;
     margin-bottom: 3rem;
 }
 
 .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero h11 {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #60a5fa;
+    background-color: rgba(96, 165, 250, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(96, 165, 250, 0.2);
 }
 
 .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: #cbd5e1;
+    font-weight: 400;
 }
 
 /* 爱好部分 */
@@ -138,10 +158,22 @@ nav {
 .blog-list,
 .friends-list {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
-.blog-item,
+.blog-item {
+    display: block;
+    background: linear-gradient(180deg, #ffffff, #fbfdff);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid rgba(37,99,235,0.08);
+    box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
 .friend-card {
     background: white;
     padding: 1.5rem;
@@ -149,17 +181,30 @@ nav {
     border-left: 4px solid #2563eb;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.blog-item:hover,
-.friend-card:hover {
-    transform: translateX(5px);
+.blog-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(16,24,40,0.08);
 }
 
-.blog-item h3,
-.friend-card h3 {
-    color: #2563eb;
+.blog-item h3 {
+    color: #111827;
     margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.blog-date {
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.blog-description {
+    color: #4b5563;
 }
 
 .blog-date {
@@ -334,4 +379,55 @@ footer a:hover {
     .skills-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Cusdis 评论样式：让评论面板与页面融为一体 */
+.comments {
+    max-width: 900px;
+    margin: 2.5rem auto;
+    padding: 0 1rem;
+    background: transparent;
+}
+
+#cusdis_thread {
+    width: 100%;
+    background: transparent;
+    border: none;
+}
+
+/* 目标是让 iframe 占满父容器且无边框阴影 */
+#cusdis_thread iframe,
+iframe[src*="cusdis"] {
+    width: 100% !important;
+    /* 近似容纳 3-4 条评论的高度，避免过长 */
+    min-height: 800px !important;
+    height: auto !important;
+    max-height: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    background: transparent !important;
+}
+
+/* 如果内嵌元素产生滚动条，强制在外部展开并隐藏滚条视觉 */
+#cusdis_thread, #cusdis_thread * {
+    overflow: visible !important;
+    max-height: none !important;
+}
+
+/* 尝试隐藏滚动条（视觉上） */
+#cusdis_thread::-webkit-scrollbar,
+iframe[src*="cusdis"]::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* 小屏幕适配：给移动端更多高度 */
+@media (max-width: 1024px) {
+    /* 平板上稍小一点 */
+    #cusdis_thread iframe, iframe[src*="cusdis"] { min-height: 700px !important; }
+}
+
+@media (max-width: 480px) {
+    /* 手机上再适当减少 */
+    #cusdis_thread iframe, iframe[src*="cusdis"] { min-height: 600px !important; }
 }

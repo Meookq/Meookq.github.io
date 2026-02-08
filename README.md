@@ -1,1 +1,1 @@
-Ming's personal website
+v0.2

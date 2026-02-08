@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Sample Post 2 - Ming's Blog</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <header>
     <nav>
-      <a href="/" class="logo">Ming</a>
+    <a href="../index.html" class="logo">Ming</a>
       <button class="menu-toggle" id="menuToggle">☰</button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about/index.html">About</a></li>
-        <li><a href="/blog/index.html" class="active">Blog</a></li>
-        <li><a href="/friends/index.html">Friends</a></li>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="index.html" class="active">Blog</a></li>
+        <li><a href="../friends/index.html">Friends</a></li>
       </ul>
     </nav>
   </header>
@@ -28,6 +28,31 @@
       <p></p>
     </article>
   </div>
+
+  <!-- BEGIN COMMENTS MODULE: copy this entire block to add comments -->
+  <section class="comments">
+    <h2 style="color: #2563eb; margin-bottom: 1rem; text-align: center;">Comments</h2>
+    <div id="cusdis_thread"
+         data-host="https://cusdis.com"
+         data-app-id="b8b9f88c-9eaa-483a-8126-9eaa02574b34"
+         data-page-id="{{ PAGE_ID }}"
+         data-page-url="{{ PAGE_URL }}"
+         data-page-title="{{ PAGE_TITLE }}"
+    ></div>
+    <script>
+      (function(){
+        var t = document.getElementById('cusdis_thread'); if(!t) return;
+        try {
+          var pid = location.pathname || 'article';
+          t.setAttribute('data-page-id', pid);
+          t.setAttribute('data-page-url', location.href);
+          t.setAttribute('data-page-title', document.title || 'Article');
+        } catch(e){}
+      })();
+    </script>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  </section>
+  <!-- END COMMENTS MODULE -->
 
   <footer>
     <p>&copy; 2026 Ming's Personal Website.</p>
