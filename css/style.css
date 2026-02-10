@@ -218,6 +218,59 @@ nav {
     font-size: 0.95rem;
 }
 
+/* Back-to-blog button (used on article pages) */
+.back-to-blog {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.45rem 0.75rem;
+    background: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(37,99,235,0.12);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.back-to-blog:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(37,99,235,0.14);
+    opacity: 0.95;
+}
+
+/* Bookmarks list styling inside article */
+.bookmarks ol {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.bookmarks li {
+    background: linear-gradient(180deg, #ffffff, #fbfdff);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(37,99,235,0.06);
+    box-shadow: 0 6px 16px rgba(16,24,40,0.04);
+}
+
+.bookmarks li a {
+    color: #1e40af;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.bookmarks li a:hover {
+    text-decoration: underline;
+}
+
+.bookmarks li p {
+    margin-top: 0.5rem;
+    color: #4b5563;
+    font-size: 0.95rem;
+}
+
 /* 朋友卡片 */
 .friend-card {
     display: flex;
