@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments - MyWeb's Project</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .comments-app {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .comments-app h2 {
+            margin-bottom: 1rem;
+        }
+        .comments-note {
+            color: #666;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">MyWeb</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about/index.html">About</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="index.html" class="active">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Comments</h2>
+        <button class="exit-button" onclick="window.location.href='index.html'">Exit</button>
+        <div class="comments-app">
+            <p class="comments-note">This project is dedicated to site discussion, feedback, and comments. Leave your thoughts here.</p>
+            <section class="comments">
+                <h2 style="color: #2563eb; margin-bottom: 1rem; text-align: center;">Comments</h2>
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="b8b9f88c-9eaa-483a-8126-9eaa02574b34"
+                     data-page-id="projects/comments"
+                     data-page-url="https://meookq.github.io/projects/comments.html"
+                     data-page-title="Comments Project">
+                </div>
+                <script>
+                    (function(){
+                        var t = document.getElementById('cusdis_thread'); if(!t) return;
+                    })();
+                </script>
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

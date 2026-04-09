@@ -64,6 +64,22 @@ nav {
     color: #333;
 }
 
+.exit-button {
+    display: inline-block;
+    background-color: #f97316;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.exit-button:hover {
+    background-color: #ea580c;
+}
+
 /* 容器 */
 .container {
     max-width: 1200px;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Analyzer - Ming's Project</title>
+    <title>Color Analyzer - MyWeb's Project</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
         .analyzer-app {
@@ -68,7 +68,7 @@
 <body>
     <header>
         <nav>
-            <a href="../index.html" class="logo">Ming</a>
+            <a href="../index.html" class="logo">MyWeb</a>
             <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="../about/index.html">About</a></li>
@@ -80,6 +80,7 @@
 
     <div class="container">
         <h2>Color Analyzer</h2>
+        <button class="exit-button" onclick="window.location.href='index.html'">Exit</button>
         <div class="analyzer-app">
             <div class="controls">
                 <input type="file" id="imageInput" accept="image/*">
@@ -95,7 +96,6 @@
 
             <div class="results" id="results" style="display: none;">
                 <h3>Color Analysis Results</h3>
-                <canvas id="pieChart" width="400" height="400" style="max-width: 100%; margin: 1rem auto; display: block;"></canvas>
                 <div id="colorResults"></div>
             </div>
         </div>
@@ -111,47 +111,7 @@
 
         // No predefined color profiles - analyzing all colors in the image
 
-        function drawPieChart(data) {
-            const pieCanvas = document.getElementById('pieChart');
-            const pieCtx = pieCanvas.getContext('2d');
-            const centerX = pieCanvas.width / 2;
-            const centerY = pieCanvas.height / 2;
-            const radius = Math.min(centerX, centerY) - 20;
 
-            // Clear canvas
-            pieCtx.clearRect(0, 0, pieCanvas.width, pieCanvas.height);
-
-            let startAngle = 0;
-            data.forEach((item, index) => {
-                const sliceAngle = (item.percentage / 100) * 2 * Math.PI;
-                const endAngle = startAngle + sliceAngle;
-
-                // Draw slice
-                pieCtx.beginPath();
-                pieCtx.moveTo(centerX, centerY);
-                pieCtx.arc(centerX, centerY, radius, startAngle, endAngle);
-                pieCtx.closePath();
-                pieCtx.fillStyle = item.color;
-                pieCtx.fill();
-                pieCtx.strokeStyle = '#fff';
-                pieCtx.lineWidth = 2;
-                pieCtx.stroke();
-
-                // Draw label if percentage > 5%
-                if (item.percentage > 5) {
-                    const labelAngle = startAngle + sliceAngle / 2;
-                    const labelX = centerX + Math.cos(labelAngle) * (radius * 0.7);
-                    const labelY = centerY + Math.sin(labelAngle) * (radius * 0.7);
-
-                    pieCtx.fillStyle = '#000';
-                    pieCtx.font = '12px Arial';
-                    pieCtx.textAlign = 'center';
-                    pieCtx.fillText(`${item.percentage.toFixed(1)}%`, labelX, labelY);
-                }
-
-                startAngle = endAngle;
-            });
-        }
 
         // Load image from file input
         imageInput.addEventListener('change', function(e) {
@@ -250,43 +210,18 @@
                 otherCount = sortedColors.slice(10).reduce((sum, [, count]) => sum + count, 0);
             }
 
-            // Prepare data for pie chart
-            const pieData = [];
-            topColors.forEach(([rgbKey, count]) => {
-                const [r, g, b] = rgbKey.split(',').map(Number);
-                pieData.push({
-                    color: `rgb(${r}, ${g}, ${b})`,
-                    percentage: (count / totalPixels) * 100,
-                    count: count
-                });
-            });
-
-            if (otherCount > 0) {
-                pieData.push({
-                    color: '#cccccc',
-                    percentage: (otherCount / totalPixels) * 100,
-                    count: otherCount
-                });
-            }
-
-            // Draw pie chart
-            drawPieChart(pieData);
-
-            // Display unique colors info
+                // Display image color summary
             const uniqueColors = sortedColors.length;
-            const totalPossibleColors = 256 * 256 * 256;
-            const percentage = ((uniqueColors / totalPossibleColors) * 100).toFixed(6);
-
-            const uniqueDiv = document.createElement('div');
-            uniqueDiv.className = 'color-result';
-            uniqueDiv.innerHTML = `
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'color-result';
+            summaryDiv.innerHTML = `
                 <div class="color-info" style="flex: 1;">
                     <strong>Unique Colors in Image:</strong> ${uniqueColors.toLocaleString()}<br>
-                    <strong>Total Possible RGB Colors:</strong> ${totalPossibleColors.toLocaleString()}<br>
-                    <strong>Percentage of All RGB Colors:</strong> <span class="percentage">${percentage}%</span>
+                    <strong>Total Pixels Counted:</strong> ${totalPixels.toLocaleString()}<br>
+                    <strong>The list below shows each color's ratio within this image.</strong>
                 </div>
             `;
-            colorResultsDiv.appendChild(uniqueDiv);
+            colorResultsDiv.appendChild(summaryDiv);
 
             // Display color list
             topColors.forEach(([rgbKey, count]) => {
