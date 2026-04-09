@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Ming's Project</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .weather-app {
+            max-width: 400px;
+            margin: 2rem auto;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .weather-icon {
+            font-size: 4rem;
+            margin: 1rem 0;
+        }
+        .temperature {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        .description {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .details {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+        }
+        .detail {
+            display: flex;
+            flex-direction: column;
+        }
+        .detail span:first-child {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .detail span:last-child {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .search {
+            margin-bottom: 1rem;
+        }
+        input[type="text"] {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            width: 70%;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+        button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">Ming</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about/index.html">About</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="index.html">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Weather App</h2>
+        <div class="weather-app">
+            <div class="search">
+                <input type="text" id="cityInput" placeholder="Enter city name">
+                <button onclick="getWeather()">Search</button>
+            </div>
+            <div class="weather-icon">☀️</div>
+            <div class="temperature" id="temperature">25°C</div>
+            <div class="description" id="description">Sunny</div>
+            <div class="city" id="city">Your City</div>
+            <div class="details">
+                <div class="detail">
+                    <span>Humidity</span>
+                    <span id="humidity">65%</span>
+                </div>
+                <div class="detail">
+                    <span>Wind Speed</span>
+                    <span id="windSpeed">5 km/h</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock weather data for demonstration
+        const mockWeatherData = {
+            'beijing': { temp: 25, desc: 'Sunny', humidity: '45%', wind: '10 km/h', icon: '☀️' },
+            'shanghai': { temp: 28, desc: 'Partly Cloudy', humidity: '70%', wind: '8 km/h', icon: '⛅' },
+            'guangzhou': { temp: 30, desc: 'Hot', humidity: '80%', wind: '5 km/h', icon: '🌞' },
+            'shenzhen': { temp: 29, desc: 'Rainy', humidity: '85%', wind: '12 km/h', icon: '🌧️' }
+        };
+
+        function getWeather() {
+            let city = document.getElementById('cityInput').value.toLowerCase().trim();
+            if (city === '') {
+                alert('Please enter a city name');
+                return;
+            }
+            let data = mockWeatherData[city];
+            if (!data) {
+                alert('Weather data not available for this city. Try Beijing, Shanghai, Guangzhou, or Shenzhen.');
+                return;
+            }
+
+            document.querySelector('.weather-icon').textContent = data.icon;
+            document.getElementById('temperature').textContent = data.temp + '°C';
+            document.getElementById('description').textContent = data.desc;
+            document.getElementById('city').textContent = city.charAt(0).toUpperCase() + city.slice(1);
+            document.getElementById('humidity').textContent = data.humidity;
+            document.getElementById('windSpeed').textContent = data.wind;
+        }
+
+        // Load default weather
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('city').textContent = 'Beijing';
+            getWeather();
+        });
+    </script>
+</body>
+</html>

@@ -151,12 +151,12 @@ nav {
 
 /* 博客部分 */
 .blog-section,
-.friends-section {
+.projects-section {
     margin: 3rem 0;
 }
 
 .blog-list,
-.friends-list {
+.projects-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
@@ -174,7 +174,7 @@ nav {
     color: inherit;
 }
 
-.friend-card {
+.project-card {
     background: white;
     padding: 1.5rem;
     border-radius: 8px;
@@ -271,18 +271,18 @@ nav {
     font-size: 0.95rem;
 }
 
-/* 朋友卡片 */
-.friend-card {
+/* 项目卡片 */
+.project-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.friend-info h3 {
+.project-info h3 {
     margin-bottom: 0.25rem;
 }
 
-.friend-tag {
+.project-tag {
     display: inline-block;
     background-color: #e0e7ff;
     color: #2563eb;
@@ -290,6 +290,19 @@ nav {
     border-radius: 20px;
     font-size: 0.85rem;
     margin-top: 0.5rem;
+}
+
+.project-link {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.project-link:hover {
+    background-color: #1d4ed8;
 }
 
 /* 关于页面 */

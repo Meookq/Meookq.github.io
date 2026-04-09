@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator - Ming's Project</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .calculator {
+            max-width: 300px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .display {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            text-align: right;
+            font-size: 1.5rem;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        button {
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #e9ecef;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #dee2e6;
+        }
+        .operator {
+            background: #007bff;
+            color: white;
+        }
+        .operator:hover {
+            background: #0056b3;
+        }
+        .equals {
+            background: #28a745;
+            color: white;
+        }
+        .equals:hover {
+            background: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">Ming</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about/index.html">About</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="index.html">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Simple Calculator</h2>
+        <div class="calculator">
+            <div class="display" id="display">0</div>
+            <div class="buttons">
+                <button onclick="clearDisplay()">C</button>
+                <button onclick="appendToDisplay('/')">/</button>
+                <button onclick="appendToDisplay('*')">*</button>
+                <button onclick="deleteLast()">⌫</button>
+
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('-')" class="operator">-</button>
+
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('+')" class="operator">+</button>
+
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('=')" class="equals" style="grid-row: span 2;">=</button>
+
+                <button onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '0';
+        let operator = null;
+        let previousInput = null;
+
+        function updateDisplay() {
+            display.textContent = currentInput;
+        }
+
+        function appendToDisplay(value) {
+            if (value === '=') {
+                calculate();
+                return;
+            }
+            if (currentInput === '0' || currentInput === 'Error') {
+                currentInput = value;
+            } else {
+                currentInput += value;
+            }
+            updateDisplay();
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            operator = null;
+            previousInput = null;
+            updateDisplay();
+        }
+
+        function deleteLast() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                currentInput = eval(currentInput).toString();
+                updateDisplay();
+            } catch (error) {
+                currentInput = 'Error';
+                updateDisplay();
+            }
+        }
+    </script>
+</body>
+</html>

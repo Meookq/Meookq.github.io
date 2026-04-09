@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Ming's Personal Website</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">Ming</a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about/index.html">About</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="index.html" class="active">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="projects-section">
+            <h2 class="section-title">My Projects</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">Explore my small projects and experiments</p>
+            <div class="projects-list">
+                <!-- Calculator -->
+                <div class="project-card">
+                    <div class="project-info">
+                        <h3>Calculator</h3>
+                        <p style="color: #666; font-size: 0.9rem;">A simple web calculator</p>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">HTML</span>
+                        <span class="project-tag">CSS</span>
+                    </div>
+                    <a href="calculator.html" class="project-link">Try it</a>
+                </div>
+                <!-- Weather App -->
+                <div class="project-card">
+                    <div class="project-info">
+                        <h3>Weather App</h3>
+                        <p style="color: #666; font-size: 0.9rem;">Check the weather</p>
+                        <span class="project-tag">API</span>
+                        <span class="project-tag">JavaScript</span>
+                    </div>
+                    <a href="weather.html" class="project-link">Try it</a>
+                </div>
+                <!-- Color Analyzer -->
+                <div class="project-card">
+                    <div class="project-info">
+                        <h3>Color Analyzer</h3>
+                        <p style="color: #666; font-size: 0.9rem;">Analyze colors in images</p>
+                        <span class="project-tag">Canvas</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">Image Processing</span>
+                    </div>
+                    <a href="color-analyzer.html" class="project-link">Try it</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- BEGIN COMMENTS MODULE: copy this entire block to add comments -->
+    <section class="comments">
+        <h2 style="color: #2563eb; margin-bottom: 1rem; text-align: center;">Comments</h2>
+        <div id="cusdis_thread"
+             data-host="https://cusdis.com"
+             data-app-id="b8b9f88c-9eaa-483a-8126-9eaa02574b34"
+             data-page-id="{{ PAGE_ID }}"
+             data-page-url="{{ PAGE_URL }}"
+             data-page-title="{{ PAGE_TITLE }}">
+        </div>
+        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+    </section>
+</body>
+</html>

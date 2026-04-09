@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Analyzer - Ming's Project</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .analyzer-app {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        input[type="file"] {
+            padding: 0.5rem;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .camera-container {
+            margin: 1rem 0;
+        }
+        video, canvas {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .results {
+            margin-top: 2rem;
+        }
+        .color-result {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0;
+        }
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            border: 1px solid #ddd;
+        }
+        .color-info {
+            flex: 1;
+        }
+        .percentage {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">Ming</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about/index.html">About</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="index.html">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Color Analyzer</h2>
+        <div class="analyzer-app">
+            <div class="controls">
+                <input type="file" id="imageInput" accept="image/*">
+                <button onclick="analyzeImage()">Analyze Image</button>
+                <button onclick="startCamera()">Take Photo</button>
+                <button onclick="capturePhoto()" id="captureBtn" style="display: none;">Capture</button>
+            </div>
+
+            <div class="camera-container">
+                <video id="video" style="display: none;" autoplay></video>
+                <canvas id="canvas"></canvas>
+            </div>
+
+            <div class="results" id="results" style="display: none;">
+                <h3>Color Analysis Results</h3>
+                <canvas id="pieChart" width="400" height="400" style="max-width: 100%; margin: 1rem auto; display: block;"></canvas>
+                <div id="colorResults"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const video = document.getElementById('video');
+        const imageInput = document.getElementById('imageInput');
+        const resultsDiv = document.getElementById('results');
+        const colorResultsDiv = document.getElementById('colorResults');
+
+        // No predefined color profiles - analyzing all colors in the image
+
+        function drawPieChart(data) {
+            const pieCanvas = document.getElementById('pieChart');
+            const pieCtx = pieCanvas.getContext('2d');
+            const centerX = pieCanvas.width / 2;
+            const centerY = pieCanvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 20;
+
+            // Clear canvas
+            pieCtx.clearRect(0, 0, pieCanvas.width, pieCanvas.height);
+
+            let startAngle = 0;
+            data.forEach((item, index) => {
+                const sliceAngle = (item.percentage / 100) * 2 * Math.PI;
+                const endAngle = startAngle + sliceAngle;
+
+                // Draw slice
+                pieCtx.beginPath();
+                pieCtx.moveTo(centerX, centerY);
+                pieCtx.arc(centerX, centerY, radius, startAngle, endAngle);
+                pieCtx.closePath();
+                pieCtx.fillStyle = item.color;
+                pieCtx.fill();
+                pieCtx.strokeStyle = '#fff';
+                pieCtx.lineWidth = 2;
+                pieCtx.stroke();
+
+                // Draw label if percentage > 5%
+                if (item.percentage > 5) {
+                    const labelAngle = startAngle + sliceAngle / 2;
+                    const labelX = centerX + Math.cos(labelAngle) * (radius * 0.7);
+                    const labelY = centerY + Math.sin(labelAngle) * (radius * 0.7);
+
+                    pieCtx.fillStyle = '#000';
+                    pieCtx.font = '12px Arial';
+                    pieCtx.textAlign = 'center';
+                    pieCtx.fillText(`${item.percentage.toFixed(1)}%`, labelX, labelY);
+                }
+
+                startAngle = endAngle;
+            });
+        }
+
+        // Load image from file input
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        drawImage(img);
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function drawImage(img) {
+            const maxWidth = 600;
+            const maxHeight = 400;
+            let { width, height } = img;
+
+            if (width > maxWidth) {
+                height = (height * maxWidth) / width;
+                width = maxWidth;
+            }
+            if (height > maxHeight) {
+                width = (width * maxHeight) / height;
+                height = maxHeight;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+        }
+
+        function startCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    video.style.display = 'block';
+                    canvas.style.display = 'none';
+                    document.getElementById('captureBtn').style.display = 'inline-block';
+                })
+                .catch(function(err) {
+                    alert('Camera access denied or not available');
+                });
+        }
+
+        function capturePhoto() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0);
+            video.style.display = 'none';
+            canvas.style.display = 'block';
+            document.getElementById('captureBtn').style.display = 'none';
+            video.srcObject.getTracks().forEach(track => track.stop());
+        }
+
+        function analyzeImage() {
+            if (canvas.width === 0 || canvas.height === 0) {
+                alert('Please load or capture an image first');
+                return;
+            }
+
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            const totalPixels = data.length / 4;
+            const colorMap = new Map();
+
+            for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                // Skip transparent pixels
+                if (data[i + 3] < 128) continue;
+
+                const rgbKey = `${r},${g},${b}`;
+                colorMap.set(rgbKey, (colorMap.get(rgbKey) || 0) + 1);
+            }
+
+            // Sort colors by count descending
+            const sortedColors = Array.from(colorMap.entries()).sort((a, b) => b[1] - a[1]);
+
+            displayResults(sortedColors, totalPixels);
+        }
+
+        function displayResults(sortedColors, totalPixels) {
+            colorResultsDiv.innerHTML = '';
+
+            let otherCount = 0;
+            const topColors = sortedColors.slice(0, 10);
+
+            // Calculate other count
+            if (sortedColors.length > 10) {
+                otherCount = sortedColors.slice(10).reduce((sum, [, count]) => sum + count, 0);
+            }
+
+            // Prepare data for pie chart
+            const pieData = [];
+            topColors.forEach(([rgbKey, count]) => {
+                const [r, g, b] = rgbKey.split(',').map(Number);
+                pieData.push({
+                    color: `rgb(${r}, ${g}, ${b})`,
+                    percentage: (count / totalPixels) * 100,
+                    count: count
+                });
+            });
+
+            if (otherCount > 0) {
+                pieData.push({
+                    color: '#cccccc',
+                    percentage: (otherCount / totalPixels) * 100,
+                    count: otherCount
+                });
+            }
+
+            // Draw pie chart
+            drawPieChart(pieData);
+
+            // Display unique colors info
+            const uniqueColors = sortedColors.length;
+            const totalPossibleColors = 256 * 256 * 256;
+            const percentage = ((uniqueColors / totalPossibleColors) * 100).toFixed(6);
+
+            const uniqueDiv = document.createElement('div');
+            uniqueDiv.className = 'color-result';
+            uniqueDiv.innerHTML = `
+                <div class="color-info" style="flex: 1;">
+                    <strong>Unique Colors in Image:</strong> ${uniqueColors.toLocaleString()}<br>
+                    <strong>Total Possible RGB Colors:</strong> ${totalPossibleColors.toLocaleString()}<br>
+                    <strong>Percentage of All RGB Colors:</strong> <span class="percentage">${percentage}%</span>
+                </div>
+            `;
+            colorResultsDiv.appendChild(uniqueDiv);
+
+            // Display color list
+            topColors.forEach(([rgbKey, count]) => {
+                const [r, g, b] = rgbKey.split(',').map(Number);
+                const percentage = ((count / totalPixels) * 100).toFixed(2);
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'color-result';
+                resultDiv.innerHTML = `
+                    <div class="color-swatch" style="background-color: rgb(${r}, ${g}, ${b})"></div>
+                    <div class="color-info">
+                        <strong>RGB(${r}, ${g}, ${b})</strong> - <span class="percentage">${percentage}%</span> (${count} pixels)
+                    </div>
+                `;
+                colorResultsDiv.appendChild(resultDiv);
+            });
+
+            // Display other colors if any
+            if (otherCount > 0) {
+                const otherPercentage = ((otherCount / totalPixels) * 100).toFixed(2);
+                const otherDiv = document.createElement('div');
+                otherDiv.className = 'color-result';
+                otherDiv.innerHTML = `
+                    <div class="color-swatch" style="background: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 10px 10px; background-position: 0 0, 0 5px, 5px -5px, -5px 0px;"></div>
+                    <div class="color-info">
+                        <strong>Other Colors</strong> - <span class="percentage">${otherPercentage}%</span> (${otherCount} pixels)
+                    </div>
+                `;
+                colorResultsDiv.appendChild(otherDiv);
+            }
+
+            resultsDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
