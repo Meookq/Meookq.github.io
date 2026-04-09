@@ -37,6 +37,11 @@
         .camera-container {
             margin: 1rem 0;
         }
+        .camera-note {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
         video, canvas {
             max-width: 100%;
             border: 1px solid #ddd;
@@ -84,10 +89,18 @@
         <div class="analyzer-app">
             <div class="controls">
                 <input type="file" id="imageInput" accept="image/*">
+                <label for="cameraSelect" style="display:inline-flex; align-items:center; gap:0.5rem;">
+                    Camera:
+                    <select id="cameraSelect" style="padding:0.4rem 0.6rem; border-radius:5px; border:1px solid #ddd;">
+                        <option value="environment">Rear Camera</option>
+                        <option value="user">Front Camera</option>
+                    </select>
+                </label>
                 <button onclick="analyzeImage()">Analyze Image</button>
                 <button onclick="startCamera()">Take Photo</button>
                 <button onclick="capturePhoto()" id="captureBtn" style="display: none;">Capture</button>
             </div>
+            <div class="camera-note">No photo is saved to disk. The image is only captured in the browser for analysis.</div>
 
             <div class="camera-container">
                 <video id="video" style="display: none;" autoplay></video>
@@ -148,9 +161,23 @@
             ctx.drawImage(img, 0, 0, width, height);
         }
 
+        let currentStream = null;
+
+        function stopCurrentStream() {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+                currentStream = null;
+            }
+        }
+
         function startCamera() {
-            navigator.mediaDevices.getUserMedia({ video: true })
+            stopCurrentStream();
+            const cameraSelect = document.getElementById('cameraSelect');
+            const facingMode = cameraSelect ? cameraSelect.value : 'environment';
+
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: facingMode } } })
                 .then(function(stream) {
+                    currentStream = stream;
                     video.srcObject = stream;
                     video.style.display = 'block';
                     canvas.style.display = 'none';
